@@ -1,0 +1,193 @@
+/* ── Shared chrome: design tokens, header, theme toggle, footer, icons ──────
+   Single source of truth for the cross-page look (canonical values taken from
+   the front page). Page stylesheets load after this and add page styles only. */
+
+:root {
+  --bg: #0e1014;
+  --surface: #13161c;
+  --card: #1c1f27;
+  --orange: #e8610c;
+  --orange-soft: rgba(232, 97, 12, 0.15);
+  --accent-bg:     rgba(232, 97, 12, 0.07);
+  --accent-bg-mid: rgba(232, 97, 12, 0.20);
+  --accent-strong: rgba(232, 97, 12, 0.18);
+  --accent-border: rgba(232, 97, 12, 0.26);
+  --accent-focus:  rgba(232, 97, 12, 0.18);
+  --text: #f0ebe3;
+  --text-dim: rgba(240, 235, 227, 0.62);
+  --muted: #6a6e7a;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-mid: rgba(255, 255, 255, 0.12);
+  --green: #2ba870;
+  --red: #c03535;
+  --amber: #d4920a;
+  --shadow: 0 20px 44px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+/* ── Light theme (cream + navy-blue) ─────────────────────────────────────── */
+[data-theme="light"] {
+  --bg:            #f0ebe1;
+  --surface:       #faf6ee;
+  --card:          #ffffff;
+  --orange:        #1a4f8c;   /* clearly blue — readable on cream */
+  --orange-soft:   rgba(26, 79, 140, 0.09);
+  --accent-bg:     rgba(26, 79, 140, 0.07);
+  --accent-bg-mid: rgba(26, 79, 140, 0.13);
+  --accent-strong: rgba(26, 79, 140, 0.18);
+  --accent-border: rgba(26, 79, 140, 0.26);
+  --accent-focus:  rgba(26, 79, 140, 0.18);
+  --text:          #1f2933;
+  --text-dim:      rgba(31, 41, 51, 0.65);
+  --muted:         #5b6773;
+  --border:        rgba(58, 68, 76, 0.13);
+  --border-mid:    rgba(58, 68, 76, 0.24);
+  --green:         #1f6a52;
+  --red:           #8b2e2e;
+  --amber:         #9a6700;
+  --shadow:        0 18px 38px rgba(26, 79, 140, 0.11);
+  --shadow-sm:     0 4px 16px rgba(26, 79, 140, 0.07);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+input, select, textarea, button {
+  font-family: inherit;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a { color: var(--orange); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: -0.15em;
+}
+
+.material-symbols-outlined.icon-fill {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 18px 60px;
+}
+
+/* ── Site header ─────────────────────────────────────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 18px;
+  margin-bottom: 4px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.header-logo:hover { text-decoration: none; opacity: 0.8; }
+
+.header-logo img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.header-logo-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.header-logo-text span { color: var(--orange); }
+
+/* ── Theme toggle ────────────────────────────────────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border-mid);
+  border-radius: 100px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+.theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+.theme-btn:hover { color: var(--text); }
+.theme-btn.active { background: var(--orange); color: #fff; }
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 22px 0;
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.site-footer a { color: var(--muted); text-decoration: none; }
+.site-footer a:hover { color: var(--orange); }
+.caseforge-link { color: var(--orange); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .site-footer { flex-direction: column; }
+}
+
+/* Respect users who opt out of motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

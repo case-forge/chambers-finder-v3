@@ -1,0 +1,13 @@
+/* Self-hosted Material Symbols subset (16 icons used by this site).
+   Regenerate via Google Fonts css2 API with &icon_names=… if icons are added:
+   account_balance,balance,call,check_circle,content_copy,done,edit_note,
+   file_download,gavel,language,location_on,mail,refresh,star,upload_file,visibility,visibility_off */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  /* Bump the ?v= query when the subset changes; the file has a 30-day cache,
+     so the version string is what forces browsers to fetch the new glyphs. */
+  src: url(/fonts/material-symbols-subset.woff2?v=2) format('woff2');
+}

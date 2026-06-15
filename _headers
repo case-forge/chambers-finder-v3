@@ -1,0 +1,39 @@
+/*
+  # Prevent clickjacking
+  X-Frame-Options: DENY
+
+  # Prevent MIME sniffing
+  X-Content-Type-Options: nosniff
+
+  # Minimal referrer
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Force HTTPS for 1 year, include subdomains
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Disable browser features we never use
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()
+
+  # Isolate browsing context
+  Cross-Origin-Opener-Policy: same-origin
+
+  # CSP - no unsafe-inline: all CSS and JS are external files; icon font self-hosted
+  Content-Security-Policy: default-src 'none'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+# Short TTL: assets are not fingerprinted, so deploys must show up quickly.
+# ETags make revalidation cheap (304s) once the 5 minutes lapse.
+/css/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+/img/*
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/fonts/*
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=86400

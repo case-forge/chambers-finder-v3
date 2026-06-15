@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/img/caseforge-favicon.ico">
+  <link rel="apple-touch-icon" href="/img/caseforge-logo.png">
+  <title>Chambers Finder · CaseForge</title>
+  <meta name="description" content="Find barristers' chambers branches near any family court in England and Wales. Built for family law practitioners who primarily take legal aid.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f0ebe1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1014">
+  <link rel="canonical" href="https://caseforge.uk/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://caseforge.uk/">
+  <meta property="og:title" content="Chambers Finder · CaseForge">
+  <meta property="og:description" content="Find barristers' chambers branches near any family court in England and Wales. Built for family law practitioners who primarily take legal aid.">
+  <meta property="og:image" content="https://caseforge.uk/img/caseforge-logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Chambers Finder · CaseForge">
+  <meta name="twitter:description" content="Find barristers' chambers branches near any family court in England and Wales. Built for family law practitioners who primarily take legal aid.">
+  <meta name="twitter:image" content="https://caseforge.uk/img/caseforge-logo.png">
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <!-- Prevent flash of wrong theme: set data-theme before CSS renders -->
+  <script src="/js/theme-init.js"></script>
+  <script src="/js/theme-toggle.js" defer></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ── SITE HEADER ── -->
+  <header class="site-header">
+    <a href="/" class="header-logo" title="Chambers Finder">
+      <img src="/img/caseforge-logo.png" alt="CaseForge" width="44" height="44">
+      <span class="header-logo-text">Case<span>Forge</span></span>
+    </a>
+    <div class="theme-toggle" id="theme-toggle" role="group" aria-label="Colour theme">
+      <button class="theme-btn" data-t="light" title="Light mode" aria-pressed="false">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="theme-btn" data-t="auto" title="Follow device" aria-pressed="false">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+      </button>
+      <button class="theme-btn" data-t="dark" title="Dark mode" aria-pressed="false">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── HERO: title / subtitle / tags / ko-fi — overflow:hidden is safe here ─ -->
+  <section class="hero">
+    <h1>Chambers Finder</h1>
+    <p class="hero-sub">Find barristers' chambers branches near any family court in England and Wales. Built for family law practitioners who primarily take legal aid.</p>
+    <a class="kofi-btn" href="https://ko-fi.com/case_forge" target="_blank" rel="noopener noreferrer">☕ Support this tool</a>
+  </section>
+
+  <!-- ── TOOLBAR CARD: search + radius — overflow:visible CRITICAL -->
+  <div class="toolbar-card">
+    <div class="search-wrap">
+      <input
+        id="search-input"
+        type="search"
+        placeholder="Search for a court or chambers…"
+        autocomplete="off"
+        spellcheck="false"
+        role="combobox"
+        aria-label="Search courts or chambers"
+        aria-expanded="false"
+        aria-controls="search-results"
+        aria-autocomplete="list"
+      >
+      <div id="search-results" class="search-results" role="listbox" aria-label="Search suggestions"></div>
+    </div>
+    <div class="toolbar-row">
+      <div class="radius-group" id="radius-group">
+        <span class="radius-label">Travel radius</span>
+        <!-- radius buttons injected by JS -->
+      </div>
+      <div id="hero-meta" class="hero-meta">Loading…</div>
+    </div>
+  </div>
+
+  <!-- ── Load error ─────────────────────────────────────────────────────────── -->
+  <div id="load-error"></div>
+
+  <!-- ── Prefs summary bar ──────────────────────────────────────────────────── -->
+  <div id="prefs-bar" class="hidden">
+    <span class="prefs-bar-info" id="prefs-bar-info"></span>
+    <div class="prefs-bar-actions">
+      <button class="btn-sm" id="export-prefs-btn"><span class="material-symbols-outlined" aria-hidden="true">file_download</span> Export</button>
+      <button class="btn-sm" id="import-prefs-btn"><span class="material-symbols-outlined" aria-hidden="true">upload_file</span> Import</button>
+      <button class="btn-sm danger" id="clear-prefs-btn"><span class="material-symbols-outlined" aria-hidden="true">refresh</span> Reset all</button>
+    </div>
+  </div>
+
+  <!-- ── Contacted bar — appears once any branch is called/emailed this session ─ -->
+  <div id="contacted-bar" class="hidden">
+    <span class="contacted-bar-info" id="contacted-bar-info"></span>
+    <div class="prefs-bar-actions">
+      <button class="btn-sm" id="save-link-btn"><span class="material-symbols-outlined" aria-hidden="true">content_copy</span> Copy save link</button>
+      <button class="btn-sm danger" id="reset-session-btn"><span class="material-symbols-outlined" aria-hidden="true">refresh</span> Reset session</button>
+    </div>
+  </div>
+
+  <!-- ── Status strip ───────────────────────────────────────────────────────── -->
+  <section id="status-strip">
+    <div class="status-block"><strong>—</strong><small>chambers sets</small></div>
+    <div class="status-block"><strong>—</strong><small>courts on file</small></div>
+    <div class="status-block"><strong>—</strong><small>mapped branches</small></div>
+    <div class="status-block"><strong>—</strong><small>starred by you</small></div>
+    <div class="status-block hidden-block"><strong>—</strong><small>hidden by you</small></div>
+    <div class="status-block contacted-block"><strong>—</strong><small>contacted</small></div>
+  </section>
+
+  <!-- ── Results────────────────────────────────────────────────────────────── -->
+  <section id="results">
+    <div class="results-placeholder">
+      <div class="big-icon"><span class="material-symbols-outlined" aria-hidden="true">balance</span></div>
+      <p>Search for a court to see nearby chambers, or search for a chambers to see all its branches.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span class="footer-links"><a href="/">Chambers Finder</a> &middot; <a href="/contact">Contact</a> &middot; <a href="/privacy">Privacy</a></span>
+    <span>Built by <a class="caseforge-link" href="https://github.com/case-forge" target="_blank" rel="noopener noreferrer">CaseForge</a> &middot; &copy; 2026 &middot; All rights reserved</span>
+  </footer>
+
+</div><!-- /.shell -->
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="/js/app.js" defer></script>
+</body>
+</html>

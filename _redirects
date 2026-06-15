@@ -1,0 +1,2 @@
+# www → non-www
+https://www.caseforge.uk/* https://caseforge.uk/:splat 301!

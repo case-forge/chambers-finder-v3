@@ -1,0 +1,43 @@
+/* Centred confirmation card (also used by 404.html). Chrome comes from base.css. */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border-mid);
+  border-radius: 22px;
+  padding: 40px 36px;
+  max-width: 480px;
+  width: 100%;
+  margin: 48px auto;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.icon { font-size: 3rem; margin-bottom: 16px; color: var(--green); }
+
+.card h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.8rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: opacity 0.15s;
+}
+.back-btn:hover { opacity: 0.85; text-decoration: none; }
